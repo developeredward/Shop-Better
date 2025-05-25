@@ -1,0 +1,91 @@
+<%- include('../partials/header') %>
+<h2>Add Product</h2>
+<form action="/admin/products/add" method="POST" enctype="multipart/form-data">
+  <input type="text" name="name" placeholder="Product Name" required />
+  <textarea name="description" placeholder="Description"></textarea>
+  <input type="number" name="price" placeholder="Price" required step="0.01" />
+
+  <label>Category:</label>
+  <select name="category" id="category-select" required>
+    <option value="">-- Select Category --</option>
+    <option value="Clothing">Clothing</option>
+    <option value="Phones">Phones</option>
+    <option value="Computers">Computers</option>
+    <option value="Watches">Watches</option>
+    <option value="Accessories">Accessories</option>
+    <option value="Other">Other</option>
+  </select>
+
+  <div id="tags-container">
+    <p><strong>Tags:</strong></p>
+    <!-- Dynamic checkboxes will be injected here -->
+  </div>
+
+  <label><input type="checkbox" name="isFeatured" /> Featured</label><br />
+  <label><input type="checkbox" name="isFlashSale" /> Flash Sale</label><br />
+  <label><input type="checkbox" name="discountActive" /> Discount Active</label
+  ><br />
+  <input type="number" name="discountPercent" placeholder="Discount %" />
+
+  <label>Image:</label>
+  <input type="file" name="image" accept="image/*" required />
+
+  <button type="submit">Add Product</button>
+</form>
+
+<script>
+  const categoryTags = {
+    Clothing: [
+      "Men Clothing",
+      "Women Clothing",
+      "Children Clothing",
+      "Unisex",
+      "Sportswear",
+      "Accessories",
+    ],
+    Phones: [
+      "Android",
+      "iPhone",
+      "Phone Accessories",
+      "Smartphones",
+      "Refurbished",
+    ],
+    Computers: [
+      "Laptops",
+      "Desktops",
+      "Monitors",
+      "Computer Accessories",
+      "Gaming PCs",
+    ],
+    Watches: [
+      "Men Watches",
+      "Women Watches",
+      "Smart Watches",
+      "Luxury",
+      "Casual",
+    ],
+    Accessories: ["Bags", "Shoes", "Belts", "Jewelry"],
+    Other: ["Gift Items", "Promo", "Trending", "Best Sellers"],
+  };
+
+  const categorySelect = document.getElementById("category-select");
+  const tagsContainer = document.getElementById("tags-container");
+
+  categorySelect.addEventListener("change", () => {
+    const selected = categorySelect.value;
+    const tags = categoryTags[selected] || [];
+
+    // Clear current tags
+    tagsContainer.innerHTML = "<p><strong>Tags:</strong></p>";
+
+    // Add new checkboxes
+    tags.forEach((tag) => {
+      const label = document.createElement("label");
+      label.innerHTML = `<input type="checkbox" name="tags" value="${tag}"> ${tag}`;
+      tagsContainer.appendChild(label);
+      tagsContainer.appendChild(document.createElement("br"));
+    });
+  });
+</script>
+
+<%- include('../partials/footer') %>

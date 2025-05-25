@@ -1,0 +1,72 @@
+<%- include('../partials/header') %>
+
+<h2>Admin - Products</h2>
+<a href="/admin/products/add" class="btn btn-primary">➕ Add New Product</a>
+
+<div style="margin-top: 20px">
+  <% if (products.length === 0) { %>
+  <p>No products available.</p>
+  <% } else { %>
+  <table border="1" cellspacing="0" cellpadding="10">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Tags</th>
+        <th>Discount</th>
+        <th>Flags</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% products.forEach(product => { %>
+      <tr>
+        <td>
+          <% if (product.imageUrl) { %>
+          <img
+            src="<%= product.imageUrl %>"
+            alt="<%= product.name %>"
+            width="80"
+          />
+          <% } else { %>
+          <em>No image</em>
+          <% } %>
+        </td>
+        <td><%= product.name %></td>
+        <td>$<%= product.price.toFixed(2) %></td>
+        <td><%= product.category %></td>
+        <td><%= product.tags.join(", ") %></td>
+        <td>
+          <% if (product.discountActive) { %> <%= product.discountPercent %>%
+          OFF <% } else { %>
+          <em>None</em>
+          <% } %>
+        </td>
+        <td>
+          <% if (product.isFeatured) { %>
+          <span style="color: green">★ Featured</span><br />
+          <% } %> <% if (product.isFlashSale) { %>
+          <span style="color: red">⚡ Flash Sale</span>
+          <% } %>
+        </td>
+        <td>
+          <!-- Delete form -->
+          <form
+            action="/admin/products/delete/<%= product._id %>"
+            method="POST"
+            onsubmit="return confirm('Are you sure you want to delete <%= product.name %>?');"
+            style="display: inline"
+          >
+            <button type="submit" style="color: red">🗑 Delete</button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>

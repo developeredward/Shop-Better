@@ -1,0 +1,79 @@
+<%- include("../partials/header", { title: "Edit Product" }) %>
+
+<h2>Edit Product</h2>
+
+<form action="/admin/products/edit/<%= product._id %>" method="POST" enctype="multipart/form-data">
+  <label>Name:</label>
+  <input type="text" name="name" value="<%= product.name %>" required><br>
+
+  <label>Description:</label>
+  <textarea name="description" required><%= product.description %></textarea><br>
+
+  <label>Price ($):</label>
+  <input type="number" step="0.01" name="price" value="<%= product.price %>" required><br>
+
+  <label>Category:</label>
+  <select name="category" id="category-select" required>
+    <% categories.forEach(cat => { %>
+      <option value="<%= cat %>" <%= product.category === cat ? "selected" : "" %>><%= cat %></option>
+    <% }) %>
+  </select><br>
+
+  <div id="tags-container">
+    <label>Tags:</label>
+    <div id="tags-list">
+      <% (tagsByCategory[product.category] || []).forEach(tag => { %>
+        <label>
+          <input type="checkbox" name="tags" value="<%= tag %>" 
+            <%= product.tags.includes(tag) ? "checked" : "" %> > <%= tag %>
+        </label>
+      <% }) %>
+    </div>
+  </div>
+
+  <label>
+    <input type="checkbox" name="isFeatured" value="1" <%= product.isFeatured ? "checked" : "" %> >
+    Featured Product
+  </label><br>
+
+  <label>
+    <input type="checkbox" name="isFlashSale" value="1" <%= product.isFlashSale ? "checked" : "" %> >
+    Flash Sale
+  </label><br>
+
+  <label>
+    <input type="checkbox" name="discountActive" value="1" <%= product.discountActive ? "checked" : "" %> >
+    Has Discount
+  </label><br>
+
+  <label>Discount Percent (%):</label>
+  <input type="number" name="discountPercent" value="<%= product.discountPercent || 0 %>"><br>
+
+  <label>Current Image:</label><br>
+  <% if (product.imageUrl) { %>
+    <img src="<%= product.imageUrl %>" alt="Product Image" width="150"><br>
+  <% } %>
+
+  <label>Upload New Image:</label>
+  <input type="file" name="image"><br><br>
+
+  <button type="submit">Update Product</button>
+</form>
+
+<script>
+   const tagsByCategory = JSON.parse(`<%- JSON.stringify(tagsByCategory).replace(/</g, '\\u003c') %>`);
+  const tagsList = document.getElementById("tags-list");
+  const categorySelect = document.getElementById("category-select");
+
+  categorySelect.addEventListener("change", () => {
+    const selected = categorySelect.value;
+    const tags = tagsByCategory[selected] || [];
+    tagsList.innerHTML = tags.map(tag => `
+      <label>
+        <input type="checkbox" name="tags" value="${tag}"> ${tag}
+      </label>
+    `).join("");
+  });
+</script>
+
+<%- include("../partials/footer") %>

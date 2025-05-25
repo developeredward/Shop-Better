@@ -1,0 +1,16 @@
+<%- include('partials/header') %>
+
+<h2>Your Cart</h2>
+<ul>
+  <% cart.forEach(item => { %>
+  <li>
+    <%= item.product.name %> x <%= item.quantity %> = $<%= item.product.price *
+    item.quantity %>
+  </li>
+  <% }) %>
+</ul>
+<p>Total: $<%= total %></p>
+<form action="/checkout" method="POST">
+  <button type="submit">Checkout</button>
+</form>
+<%- include('partials/footer') %>

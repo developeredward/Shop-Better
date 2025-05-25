@@ -1,0 +1,25 @@
+<%- include('../partials/header') %>
+
+<h2>Admin - Orders</h2>
+<ul>
+  <% orders.forEach(order => { %>
+  <li>
+    <strong>Order ID:</strong> <%= order._id %><br />
+    <strong>User:</strong> <%= order.userId ? order.userId.name : 'Deleted User'
+    %><br />
+    <strong>Amount:</strong> $<%= order.amount.toFixed(2) %><br />
+    <strong>Products:</strong>
+    <ul>
+      <% order.products.forEach(item => { %>
+      <li>
+        <%= item.productId ? item.productId.name : 'Deleted Product' %> x <%=
+        item.quantity %>
+      </li>
+      <% }) %>
+    </ul>
+    <hr />
+  </li>
+  <% }) %>
+</ul>
+
+<%- include('../partials/footer') %>
