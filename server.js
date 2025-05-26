@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const dotenv = require("dotenv");
 const path = require("path");
+const cartCountMiddleware = require("./middleware/cartCount");
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
   res.locals.user = req.session.user;
   next();
 });
+app.use(cartCountMiddleware);
 
 // Import routes
 const adminRoutes = require("./routes/admin");

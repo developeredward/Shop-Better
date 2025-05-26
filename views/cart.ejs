@@ -1,16 +1,95 @@
 <%- include('partials/header') %>
+<link rel="stylesheet" href="/css/cart.css" />
 
-<h2>Your Cart</h2>
-<ul>
-  <% cart.forEach(item => { %>
-  <li>
-    <%= item.product.name %> x <%= item.quantity %> = $<%= item.product.price *
-    item.quantity %>
-  </li>
-  <% }) %>
-</ul>
-<p>Total: $<%= total %></p>
-<form action="/checkout" method="POST">
-  <button type="submit">Checkout</button>
-</form>
+<section class="cart-container">
+  <h2 class="cart-heading">Shopping Cart</h2>
+
+  <% if (cart.length === 0) { %>
+  <p class="empty-cart">Your cart is empty.</p>
+  <% } else { %>
+
+  <div class="cart-table-wrapper">
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% cart.forEach(item => { %>
+        <tr>
+          <td class="product-info">
+            <img
+              src="<%= item.product.imageUrl %>"
+              alt="<%= item.product.name %>"
+              class="product-img"
+            />
+            <span><%= item.product.name %></span>
+          </td>
+          <td>$<%= item.product.price %></td>
+          <td>
+            <span>x <%= item.quantity %></span>
+            <!-- Optional: Quantity controls could be added here -->
+            <form
+              action="/cart/remove/<%= item.product._id %>"
+              method="POST"
+              class="remove-item-form"
+            >
+              <button
+                type="submit"
+                class="btn-remove-item"
+                aria-label="Remove <%= item.product.name %>"
+              >
+                <i class="fas fa-trash"></i>
+              </button>
+            </form>
+          </td>
+          <td>$<%= (item.product.price * item.quantity).toFixed(2) %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <div class="cart-actions">
+      <form action="/cart/remove-all" method="POST">
+        <button type="submit" class="btn btn-outline">Clear Cart</button>
+      </form>
+    </div>
+
+    <div class="cart-summary-section">
+      <!-- <div class="coupon-box">
+        <form action="/cart/apply-coupon" method="POST" class="coupon-form">
+          <input type="text" name="couponCode" placeholder="Coupon Code" />
+          <button type="submit" class="btn btn-red">Apply Coupon</button>
+        </form>
+      </div> -->
+
+      <div class="cart-summary">
+        <h3>Cart Total</h3>
+        <div class="summary-row">
+          <span>Subtotal:</span>
+          <span>$<%= total.toFixed(2) %></span>
+        </div>
+        <div class="summary-row">
+          <span>Shipping:</span>
+          <span>Free</span>
+        </div>
+        <div class="summary-row total">
+          <strong>Total:</strong>
+          <strong>$<%= total.toFixed(2) %></strong>
+        </div>
+
+        <a href="/cart/checkout" class="btn btn-checkout"
+          >Proceed to Checkout</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <% } %>
+</section>
+
 <%- include('partials/footer') %>

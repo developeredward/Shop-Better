@@ -1,0 +1,36 @@
+<%- include('partials/header', { title: 'Contact Us', currentPath }) %>
+<link rel="stylesheet" href="/css/contact.css" />
+
+<section class="contact-section">
+  <div class="contact-container">
+    <h1>Contact Us</h1>
+    <p>
+      If you have any questions, feel free to reach out. We're here to help!
+    </p>
+
+    <div class="contact-boxes">
+      <div class="contact-info">
+        <p><i class="fas fa-envelope"></i> support@shopbetter.com</p>
+        <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+        <p>
+          <i class="fas fa-map-marker-alt"></i> 123 Market Street, Lagos,
+          Nigeria
+        </p>
+      </div>
+
+      <form class="contact-form" method="POST" action="/contact">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea
+          name="message"
+          placeholder="Your Message"
+          rows="5"
+          required
+        ></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

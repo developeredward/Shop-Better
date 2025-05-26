@@ -1,0 +1,19 @@
+<%- include('partials/header') %>
+<link rel="stylesheet" href="/css/order-confirmation.css" />
+
+<section class="confirmation-container">
+  <div class="confirmation-content">
+    <h1>🎉 Thank You for Your Purchase!</h1>
+    <p>
+      Your order has been placed successfully. We'll notify you when it's
+      shipped.
+    </p>
+    <div class="confirmation-details">
+      <p><strong>Customer:</strong> <%= user.name %></p>
+      <p><strong>Email:</strong> <%= user.email %></p>
+    </div>
+    <a href="/products" class="btn">Continue Shopping</a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

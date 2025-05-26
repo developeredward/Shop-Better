@@ -53,41 +53,46 @@
       </ul>
 
       <ul class="nav-links">
+        <% if (currentPath === '/') { %>
         <li>
-          <form class="search-input" action="/search" method="GET">
+          <div class="search-container" id="searchForm">
             <input
               type="text"
               name="query"
               class="search-input"
+              id="searchBox"
               placeholder="Search products..."
+              autocomplete="off"
               required
             />
-            <button class="search-btn" type="submit">
+            <button class="search-btn">
               <i class="fas fa-search icon"></i>
             </button>
-          </form>
+            <div class="search-suggestions" id="suggestionsBox"></div>
+          </div>
         </li>
+        <% } %>
+
         <li>
-          <a href="/cart">
-            <i class="far fa-heart" aria-hidden="true"></i>
+          <a href="/cart" class="cart-icon">
+            <i class="fas fa-cart-shopping"></i>
+            <% if (cartCount > 0) { %>
+            <span class="cart-badge"><%= cartCount %></span>
+            <% } %>
           </a>
         </li>
-        <li>
-          <a href="/cart"> <i class="fas fa-cart-shopping"></i></a>
-        </li>
+
         <li class="user-dropdown">
-          <i class="fas fa-user"></i>
           <% if (user) { %>
+          <i class="fas fa-user"></i>
           <span class="username"><%= user.name %></span>
           <ul class="dropdown-menu">
-            <li>
-              <a href="/settings"><i class="fas fa-cog"></i> Settings</a>
-            </li>
             <li>
               <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </li>
           </ul>
-          <% } else { %>
+          <% } else if (currentPath !== '/login' && currentPath !== '/register')
+          { %>
           <a href="/login">Login</a> | <a href="/register">Register</a>
           <% } %>
         </li>

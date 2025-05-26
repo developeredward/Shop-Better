@@ -1,0 +1,61 @@
+<%- include('partials/header') %>
+<link rel="stylesheet" href="/css/checkout.css" />
+
+<section class="checkout-container">
+  <h2 class="checkout-title">Billing Details</h2>
+
+  <form action="/cart/checkout" method="POST" class="checkout-form">
+    <div class="checkout-grid">
+      <!-- Billing Details Form -->
+
+      <!-- Order Summary -->
+      <div class="order-summary">
+        <h3>Your Order</h3>
+        <ul class="order-items">
+          <% cart.forEach(item => { %>
+          <li class="order-item">
+            <span><%= item.product.name %> x <%= item.quantity %></span>
+            <span>$<%= (item.product.price * item.quantity).toFixed(2) %></span>
+          </li>
+          <% }) %>
+        </ul>
+
+        <div class="order-totals">
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span>$<%= total.toFixed(2) %></span>
+          </div>
+          <div class="summary-row">
+            <span>Shipping</span>
+            <span>Free</span>
+          </div>
+          <div class="summary-row total">
+            <strong>Total</strong>
+            <strong>$<%= total.toFixed(2) %></strong>
+          </div>
+        </div>
+
+        <!-- Payment Method -->
+        <h4>Payment Method</h4>
+        <div class="payment-methods">
+          <label>
+            <input disabled type="radio" name="paymentMethod" value="card" />
+            Credit/Debit Card
+          </label>
+          <label>
+            <input disabled type="radio" name="paymentMethod" value="paypal" />
+            PayPal
+          </label>
+          <label>
+            <input type="radio" name="paymentMethod" value="cod" checked />
+            Cash on Delivery
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-checkout">Place Order</button>
+      </div>
+    </div>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

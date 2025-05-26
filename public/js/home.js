@@ -1,3 +1,49 @@
+const searchBox = document.getElementById("searchBox");
+const suggestionsBox = document.getElementById("suggestionsBox");
+
+searchBox.addEventListener("input", async () => {
+  const query = searchBox.value.trim();
+
+  if (!query) {
+    suggestionsBox.innerHTML = "";
+    suggestionsBox.style.display = "none";
+    return;
+  }
+
+  try {
+    const res = await fetch(
+      `/search/suggestions?query=${encodeURIComponent(query)}`
+    );
+    const products = await res.json();
+
+    if (products.length === 0) {
+      suggestionsBox.innerHTML =
+        '<div style="padding: 10px;">No results found.</div>';
+      suggestionsBox.style.display = "block";
+      return;
+    }
+
+    suggestionsBox.innerHTML = products
+      .map(
+        (p) => `
+          <a href="/product/${p._id}">
+            <img src="${p.imageUrl}" alt="${p.name}" />
+            <span>${p.name}</span>
+          </a>
+        `
+      )
+      .join("");
+    suggestionsBox.style.display = "block";
+  } catch (error) {
+    console.error("Search error:", error);
+  }
+});
+
+document.addEventListener("click", (e) => {
+  if (!document.getElementById("searchForm").contains(e.target)) {
+    suggestionsBox.style.display = "none";
+  }
+});
 document.addEventListener("DOMContentLoaded", function () {
   new Swiper(".slider-banner", {
     loop: true,

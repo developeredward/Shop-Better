@@ -1,5 +1,40 @@
 </main>
+
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="/js/home.js"></script>
 </body>
+<footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h4>ShopBetter</h4>
+        <p>Your go-to store for the best deals online.</p>
+      </div>
+  
+      <div class="footer-column">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/about">About</a></li>
+          <% if (user && user.isAdmin) { %>
+          <li><a href="/admin">Admin Dashboard</a></li>
+          <% } %>
+        </ul>
+      </div>
+  
+      <div class="footer-column">
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+  
+    <div class="footer-bottom">
+      <p>&copy; <%= new Date().getFullYear() %> ShopBetter. All rights reserved.</p>
+    </div>
+  </footer>
+  
 </html>

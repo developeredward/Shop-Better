@@ -167,7 +167,13 @@ h2 {
 }
 .product-grid .product-card button {
   background: #db4444;
+  cursor: pointer;
+  height: 30px;
+  width: 100%;
   border: none;
+}
+.product-grid .product-card button:hover {
+  background: #b83636;
 }
 
 /* Flash Sales */

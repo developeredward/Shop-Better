@@ -1,0 +1,49 @@
+.confirmation-container {
+  padding: 60px 20px;
+  text-align: center;
+  background-color: #f5f5f5;
+}
+
+.confirmation-content {
+  max-width: 600px;
+  margin: 0 auto;
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.confirmation-content h1 {
+  font-size: 2rem;
+  color: #28a745;
+}
+
+.confirmation-content p {
+  margin-top: 10px;
+  color: #555;
+}
+
+.confirmation-details {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.confirmation-details p {
+  margin: 8px 0;
+}
+
+.btn {
+  margin-top: 30px;
+  padding: 12px 24px;
+  background-color: #ff4d4f;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #e03e3f;
+}/*# sourceMappingURL=order-confirmation.css.map */

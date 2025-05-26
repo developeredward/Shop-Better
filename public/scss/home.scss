@@ -171,7 +171,13 @@ h2 {
     }
     button {
       background: #db4444;
+      cursor: pointer;
+      height: 30px;
+      width: 100%;
       border: none;
+      &:hover {
+        background: #b83636;
+      }
     }
   }
 }
