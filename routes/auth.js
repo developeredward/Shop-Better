@@ -13,7 +13,10 @@ router.post("/login", async (req, res) => {
     req.session.user = user;
     res.redirect("/");
   } else {
-    res.redirect("/login");
+    res.render("login", {
+      title: "login",
+      error: "Invalid email or password",
+    });
   }
 });
 

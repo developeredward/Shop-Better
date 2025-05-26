@@ -13,6 +13,23 @@
       color: inherit;
     }
   }
+  .page-nav {
+    position: relative;
+    padding-bottom: 4px;
+    text-decoration: none;
+    color: #333;
+  }
+
+  .page-nav.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background-color: #333;
+  }
+
   .nav-links {
     list-style: none;
     display: flex;

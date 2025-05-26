@@ -8,14 +8,38 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header class="header-container">
       <h1><a href="/">ShopBetter</a></h1>
       <ul class="nav-links">
-        <li><a href="/" class="page-nav">Home</a></li>
-        <li><a href="/contact" class="page-nav">Contact Us</a></li>
-        <li><a href="/about" class="page-nav">About Us</a></li>
+        <li>
+          <a
+            href="/"
+            class="page-nav <%= currentPath === '/' ? 'active' : '' %>"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            href="/contact"
+            class="page-nav <%= currentPath === '/contact' ? 'active' : '' %>"
+            >Contact Us</a
+          >
+        </li>
+        <li>
+          <a
+            href="/about"
+            class="page-nav <%= currentPath === '/about' ? 'active' : '' %>"
+            >About Us</a
+          >
+        </li>
       </ul>
 
       <ul class="nav-links">

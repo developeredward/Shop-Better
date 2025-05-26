@@ -22,6 +22,7 @@ app.set("views", path.join(__dirname, "views"));
 
 // Auth Middleware to make user available in all views
 app.use((req, res, next) => {
+  res.locals.currentPath = req.path;
   res.locals.user = req.session.user;
   next();
 });
