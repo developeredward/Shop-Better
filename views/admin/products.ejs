@@ -52,6 +52,12 @@
           <% } %>
         </td>
         <td>
+          <a
+            href="/admin/products/edit/<%= product._id %>"
+            style="color: blue; margin-right: 10px"
+            >✏️ Edit</a
+          >
+
           <!-- Delete form -->
           <form
             action="/admin/products/delete/<%= product._id %>"

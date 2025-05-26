@@ -49,6 +49,23 @@ router.post("/login", async (req, res) => {
   res.redirect("/admin");
 });
 
+// Admin user list
+router.get("/users", isAdmin, async (req, res) => {
+  const users = await User.find();
+  res.render("admin/users", { title: "Admin - Users", users });
+});
+
+// Admin user update (e.g. promote to admin)
+router.post("/users/:id/toggle-admin", isAdmin, async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (!user) return res.redirect("/admin/users");
+
+  user.isAdmin = !user.isAdmin;
+  await user.save();
+
+  res.redirect("/admin/users");
+});
+
 // Admin product list
 router.get("/products", isAdmin, async (req, res) => {
   const products = await Product.find();

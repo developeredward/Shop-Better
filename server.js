@@ -32,6 +32,14 @@ const authRoutes = require("./routes/auth");
 const cartRoutes = require("./routes/cart");
 const indexRoutes = require("./routes/index");
 
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  if (["POST", "PUT"].includes(req.method)) {
+    console.log("Body:", req.body);
+  }
+  next();
+});
+
 // Use routes
 app.use("/", indexRoutes);
 app.use("/admin", adminRoutes);

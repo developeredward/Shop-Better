@@ -1,0 +1,40 @@
+<%- include('../partials/header') %>
+
+<h2>All Users</h2>
+
+<table border="1" cellpadding="10" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Name</th>
+      <th>Is Admin</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.forEach(user => { %>
+    <tr>
+      <td><%= user.email %></td>
+      <td><%= user.name || '-' %></td>
+      <td><%= user.isAdmin ? '✅ Yes' : '❌ No' %></td>
+      <td>
+        <% if (user._id.toString() !== user.session?.user?._id) { %>
+        <form
+          action="/admin/users/<%= user._id %>/toggle-admin"
+          method="POST"
+          onsubmit="return confirm('Toggle admin status for <%= user.email %>?')"
+        >
+          <button type="submit">
+            <%= user.isAdmin ? 'Remove Admin' : 'Make Admin' %>
+          </button>
+        </form>
+        <% } else { %>
+        <em>(You)</em>
+        <% } %>
+      </td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<%- include('../partials/footer') %>
