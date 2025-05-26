@@ -40,6 +40,12 @@
             >About Us</a
           >
         </li>
+        <li>
+          <% if (user) { %> <% if (user.isAdmin) { %>
+
+          <a href="/admin">Admin Dashboard</a>
+          <% } %> <% } %>
+        </li>
       </ul>
 
       <ul class="nav-links">
@@ -65,14 +71,20 @@
         <li>
           <a href="/cart"> <i class="fas fa-cart-shopping"></i></a>
         </li>
-        <li>
+        <li class="user-dropdown">
           <i class="fas fa-user"></i>
           <% if (user) { %>
-          <p>Welcome, <%= user.name %> | <a href="/logout">Logout</a></p>
+          <span class="username"><%= user.name %></span>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="/settings"><i class="fas fa-cog"></i> Settings</a>
+            </li>
+            <li>
+              <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </li>
+          </ul>
           <% } else { %>
-          <a href="/login">Login</a>
-          |
-          <a href="/register">Register</a>
+          <a href="/login">Login</a> | <a href="/register">Register</a>
           <% } %>
         </li>
       </ul>

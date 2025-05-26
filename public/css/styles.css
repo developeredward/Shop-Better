@@ -84,4 +84,43 @@
 }
 .header-container .nav-links .search-btn .icon {
   font-size: 20px;
+}
+.header-container .nav-links .user-dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  color: #333;
+}
+.header-container .nav-links .username {
+  margin-left: 6px;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+}
+.header-container .nav-links .user-dropdown .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  min-width: 160px;
+  z-index: 1000;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+}
+.header-container .nav-links .user-dropdown .dropdown-menu li {
+  list-style: none;
+}
+.header-container .nav-links .user-dropdown .dropdown-menu a {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+}
+.header-container .nav-links .user-dropdown .dropdown-menu a:hover {
+  background-color: #f2f2f2;
+}
+.header-container .nav-links .user-dropdown:hover .dropdown-menu {
+  display: block;
 }/*# sourceMappingURL=styles.css.map */
