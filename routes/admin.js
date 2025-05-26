@@ -206,4 +206,17 @@ router.get("/orders", isAdmin, async (req, res) => {
   res.render("admin/orders", { title: "Admin - Orders", orders });
 });
 
+router.post("/orders/:orderId/status", async (req, res) => {
+  const { orderId } = req.params;
+  const { status } = req.body;
+
+  try {
+    await Order.findByIdAndUpdate(orderId, { status });
+    res.redirect("/admin/orders");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error updating order status");
+  }
+});
+
 module.exports = router;

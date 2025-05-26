@@ -1,25 +1,57 @@
-<%- include('../partials/header') %>
+<%- include('../partials/admin-navbar', { title: 'BetterShop Admin', currentPath
+}) %>
+<link rel="stylesheet" href="/css/orders.css" />
+<h2>📦 Admin - Orders</h2>
 
-<h2>Admin - Orders</h2>
-<ul>
-  <% orders.forEach(order => { %>
-  <li>
-    <strong>Order ID:</strong> <%= order._id %><br />
-    <strong>User:</strong> <%= order.userId ? order.userId.name : 'Deleted User'
-    %><br />
-    <strong>Amount:</strong> $<%= order.amount.toFixed(2) %><br />
-    <strong>Products:</strong>
-    <ul>
-      <% order.products.forEach(item => { %>
-      <li>
-        <%= item.productId ? item.productId.name : 'Deleted Product' %> x <%=
-        item.quantity %>
-      </li>
-      <% }) %>
-    </ul>
-    <hr />
-  </li>
-  <% }) %>
-</ul>
-
-<%- include('../partials/footer') %>
+<% if (orders.length === 0) { %>
+<p>No orders found.</p>
+<% } else { %>
+<table>
+  <thead>
+    <tr>
+      <th>Order ID</th>
+      <th>User</th>
+      <th>Amount</th>
+      <th>Status</th>
+      <th>Products</th>
+      <th>Update Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% orders.forEach(order => { %>
+    <tr>
+      <td><%= order._id %></td>
+      <td><%= order.userId ? order.userId.name : 'Deleted User' %></td>
+      <td>$<%= order.amount.toFixed(2) %></td>
+      <td><%= order.status || 'Pending' %></td>
+      <td>
+        <ul class="products-list">
+          <% order.products.forEach(item => { %>
+          <li>
+            <%= item.productId ? item.productId.name : 'Deleted Product' %> ×
+            <%= item.quantity %>
+          </li>
+          <% }) %>
+        </ul>
+      </td>
+      <td>
+        <form action="/admin/orders/<%= order._id %>/status" method="POST">
+          <label for="status-<%= order._id %>" class="sr-only"
+            >Update Status</label
+          >
+          <select name="status" id="status-<%= order._id %>" required>
+            <option disabled selected>-- Select Status --</option>
+            <option value="Pending">Pending</option>
+            <option value="Confirmed">Confirmed</option>
+            <option value="In Transit">In Transit</option>
+            <option value="Awaiting Delivery">Awaiting Delivery</option>
+            <option value="Delivered">Delivered</option>
+          </select>
+          <button type="submit">Update</button>
+        </form>
+      </td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
+<% } %> <%- include('../partials/footer') %>

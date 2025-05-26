@@ -1,78 +1,82 @@
-<%- include('../partials/header') %>
+<%- include('../partials/admin-navbar', { title: 'BetterShop Admin', currentPath
+}) %>
 
-<h2>Admin - Products</h2>
-<a href="/admin/products/add" class="btn btn-primary">➕ Add New Product</a>
+<section class="admin-products-page">
+  <div class="page-header">
+    <h2>🛍️ Manage Products</h2>
+    <a href="/admin/products/add" class="btn btn-add">➕ Add New Product</a>
+  </div>
 
-<div style="margin-top: 20px">
   <% if (products.length === 0) { %>
-  <p>No products available.</p>
+  <p class="empty-message">No products available.</p>
   <% } else { %>
-  <table border="1" cellspacing="0" cellpadding="10">
-    <thead>
-      <tr>
-        <th>Image</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Category</th>
-        <th>Tags</th>
-        <th>Discount</th>
-        <th>Flags</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% products.forEach(product => { %>
-      <tr>
-        <td>
-          <% if (product.imageUrl) { %>
-          <img
-            src="<%= product.imageUrl %>"
-            alt="<%= product.name %>"
-            width="80"
-          />
-          <% } else { %>
-          <em>No image</em>
-          <% } %>
-        </td>
-        <td><%= product.name %></td>
-        <td>$<%= product.price.toFixed(2) %></td>
-        <td><%= product.category %></td>
-        <td><%= product.tags.join(", ") %></td>
-        <td>
-          <% if (product.discountActive) { %> <%= product.discountPercent %>%
-          OFF <% } else { %>
-          <em>None</em>
-          <% } %>
-        </td>
-        <td>
-          <% if (product.isFeatured) { %>
-          <span style="color: green">★ Featured</span><br />
-          <% } %> <% if (product.isFlashSale) { %>
-          <span style="color: red">⚡ Flash Sale</span>
-          <% } %>
-        </td>
-        <td>
-          <a
-            href="/admin/products/edit/<%= product._id %>"
-            style="color: blue; margin-right: 10px"
-            >✏️ Edit</a
-          >
-
-          <!-- Delete form -->
-          <form
-            action="/admin/products/delete/<%= product._id %>"
-            method="POST"
-            onsubmit="return confirm('Are you sure you want to delete <%= product.name %>?');"
-            style="display: inline"
-          >
-            <button type="submit" style="color: red">🗑 Delete</button>
-          </form>
-        </td>
-      </tr>
-      <% }) %>
-    </tbody>
-  </table>
+  <div class="product-table-wrapper">
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Category</th>
+          <th>Tags</th>
+          <th>Discount</th>
+          <th>Flags</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% products.forEach(product => { %>
+        <tr>
+          <td>
+            <% if (product.imageUrl) { %>
+            <img
+              src="<%= product.imageUrl %>"
+              alt="<%= product.name %>"
+              class="product-image"
+            />
+            <% } else { %>
+            <em>No image</em>
+            <% } %>
+          </td>
+          <td><%= product.name %></td>
+          <td>$<%= product.price.toFixed(2) %></td>
+          <td><%= product.category %></td>
+          <td><%= product.tags.join(", ") %></td>
+          <td>
+            <% if (product.discountActive) { %>
+            <span class="badge discount">-<%= product.discountPercent %>%</span>
+            <% } else { %>
+            <em>None</em>
+            <% } %>
+          </td>
+          <td>
+            <% if (product.isFeatured) { %>
+            <span class="badge featured">★ Featured</span><br />
+            <% } %> <% if (product.isFlashSale) { %>
+            <span class="badge flash">⚡ Flash Sale</span>
+            <% } %>
+          </td>
+          <td>
+            <a
+              href="/admin/products/edit/<%= product._id %>"
+              class="btn-action edit"
+              >✏️ Edit</a
+            >
+            <form
+              action="/admin/products/delete/<%= product._id %>"
+              method="POST"
+              class="inline-form"
+              onsubmit="return confirm('Are you sure you want to delete <%= product.name %>?');"
+            >
+              <button type="submit" class="btn-action delete">🗑 Delete</button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
   <% } %>
-</div>
+</section>
 
 <%- include('../partials/footer') %>

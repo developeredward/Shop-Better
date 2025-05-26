@@ -1,0 +1,89 @@
+h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin: 30px 0 20px;
+  color: #2c3e50;
+}
+
+table {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto 50px;
+  border-collapse: collapse;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+thead {
+  background-color: #2980b9;
+  color: white;
+}
+
+th,
+td {
+  padding: 14px 20px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  vertical-align: top;
+  font-size: 14px;
+}
+
+tbody tr:hover {
+  background-color: #f5f9ff;
+}
+
+/* Products cell will have list styling */
+.products-list {
+  padding-left: 18px;
+}
+
+.products-list li {
+  margin-bottom: 4px;
+  list-style: disc;
+  color: #555;
+}
+
+form {
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+form label {
+  font-weight: 600;
+  color: #2c3e50;
+  white-space: nowrap;
+}
+
+form select {
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  min-width: 160px;
+}
+
+form button {
+  padding: 6px 14px;
+  background-color: #2980b9;
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+form button:hover {
+  background-color: #1f5e88;
+}
+
+p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #888;
+}/*# sourceMappingURL=orders.css.map */

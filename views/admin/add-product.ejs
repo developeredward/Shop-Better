@@ -1,37 +1,83 @@
-<%- include('../partials/header') %>
-<h2>Add Product</h2>
-<form action="/admin/products/add" method="POST" enctype="multipart/form-data">
-  <input type="text" name="name" placeholder="Product Name" required />
-  <textarea name="description" placeholder="Description"></textarea>
-  <input type="number" name="price" placeholder="Price" required step="0.01" />
+<%- include('../partials/admin-navbar', { title: 'BetterShop Admin', currentPath
+}) %>
 
-  <label>Category:</label>
-  <select name="category" id="category-select" required>
-    <option value="">-- Select Category --</option>
-    <option value="Clothing">Clothing</option>
-    <option value="Phones">Phones</option>
-    <option value="Computers">Computers</option>
-    <option value="Watches">Watches</option>
-    <option value="Accessories">Accessories</option>
-    <option value="Other">Other</option>
-  </select>
+<section class="add-product-page">
+  <div class="form-container">
+    <h2>➕ Add New Product</h2>
 
-  <div id="tags-container">
-    <p><strong>Tags:</strong></p>
-    <!-- Dynamic checkboxes will be injected here -->
+    <form
+      action="/admin/products/add"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <div class="form-group">
+        <label>Product Name:</label>
+        <input type="text" name="name" placeholder="Product Name" required />
+      </div>
+
+      <div class="form-group">
+        <label>Description:</label>
+        <textarea
+          name="description"
+          rows="4"
+          placeholder="Product description..."
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Price ($):</label>
+        <input
+          type="number"
+          name="price"
+          placeholder="Price"
+          required
+          step="0.01"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Category:</label>
+        <select name="category" id="category-select" required>
+          <option value="">-- Select Category --</option>
+          <option value="Clothing">Clothing</option>
+          <option value="Phones">Phones</option>
+          <option value="Computers">Computers</option>
+          <option value="Watches">Watches</option>
+          <option value="Accessories">Accessories</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Tags:</label>
+        <div id="tags-list" class="checkbox-group">
+          <!-- Dynamic checkboxes inserted here -->
+        </div>
+      </div>
+
+      <div class="form-group checkbox-inline">
+        <label><input type="checkbox" name="isFeatured" /> Featured</label>
+        <label><input type="checkbox" name="isFlashSale" /> Flash Sale</label>
+        <label
+          ><input type="checkbox" name="discountActive" /> Discount
+          Active</label
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Discount Percent (%):</label>
+        <input type="number" name="discountPercent" placeholder="Discount %" />
+      </div>
+
+      <div class="form-group">
+        <label>Product Image:</label>
+        <input type="file" name="image" accept="image/*" required />
+      </div>
+
+      <button type="submit" class="btn-submit">🛒 Add Product</button>
+    </form>
   </div>
-
-  <label><input type="checkbox" name="isFeatured" /> Featured</label><br />
-  <label><input type="checkbox" name="isFlashSale" /> Flash Sale</label><br />
-  <label><input type="checkbox" name="discountActive" /> Discount Active</label
-  ><br />
-  <input type="number" name="discountPercent" placeholder="Discount %" />
-
-  <label>Image:</label>
-  <input type="file" name="image" accept="image/*" required />
-
-  <button type="submit">Add Product</button>
-</form>
+</section>
 
 <script>
   const categoryTags = {
@@ -69,22 +115,18 @@
   };
 
   const categorySelect = document.getElementById("category-select");
-  const tagsContainer = document.getElementById("tags-container");
+  const tagsList = document.getElementById("tags-list");
 
   categorySelect.addEventListener("change", () => {
     const selected = categorySelect.value;
     const tags = categoryTags[selected] || [];
-
-    // Clear current tags
-    tagsContainer.innerHTML = "<p><strong>Tags:</strong></p>";
-
-    // Add new checkboxes
-    tags.forEach((tag) => {
-      const label = document.createElement("label");
-      label.innerHTML = `<input type="checkbox" name="tags" value="${tag}"> ${tag}`;
-      tagsContainer.appendChild(label);
-      tagsContainer.appendChild(document.createElement("br"));
-    });
+    tagsList.innerHTML = tags
+      .map(
+        (tag) => `
+      <label><input type="checkbox" name="tags" value="${tag}"> ${tag}</label>
+    `
+      )
+      .join("");
   });
 </script>
 
