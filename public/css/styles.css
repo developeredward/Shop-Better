@@ -1,15 +1,72 @@
-body {
-  font-family: sans-serif;
-  padding: 20px;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 
-header {
+.header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  padding: 0 40px;
+  height: 100px;
+  border-bottom: 1px solid #ccc;
 }
-
-main h2 {
-  margin-bottom: 10px;
+.header-container h1 {
+  font-size: 24px;
+  color: #333;
+}
+.header-container h1 a {
+  text-decoration: none;
+  color: inherit;
+}
+.header-container .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+}
+.header-container .nav-links li {
+  text-align: center;
+  justify-self: center;
+  align-self: center;
+}
+.header-container .nav-links li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+.header-container .nav-links li .page-nav:hover {
+  border-bottom: 1px solid #333;
+}
+.header-container .nav-links li i {
+  font-size: 20px;
+  color: #333;
+}
+.header-container .nav-links li .fa-user {
+  font-size: 24px;
+  background: #f5f5f5;
+  padding: 10px;
+  border-radius: 100%;
+}
+.header-container .nav-links .search-input {
+  display: flex;
+  height: 50px;
+  width: 300px;
+  padding: 0 10px;
+  border: none;
+  background: #f5f5f5;
+  outline: none;
+}
+.header-container .nav-links .search-btn {
+  height: 50px;
+  width: 30px;
+  padding: 0 10px;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  background: #f5f5f5;
+}
+.header-container .nav-links .search-btn .icon {
+  font-size: 20px;
 }/*# sourceMappingURL=styles.css.map */

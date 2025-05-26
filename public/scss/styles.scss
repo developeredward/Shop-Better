@@ -1,13 +1,7 @@
-body {
-  font-family: sans-serif;
-  padding: 20px;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-main h2 {
-  margin-bottom: 10px;
-}
+@import "header";

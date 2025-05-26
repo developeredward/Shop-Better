@@ -3,16 +3,55 @@
   <head>
     <meta charset="UTF-8" />
     <title><%= title %></title>
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
   </head>
   <body>
-    <header>
-      <h1><a href="/">MyStore</a></h1>
-      <% if (user) { %>
-      <p>Welcome, <%= user.name %> | <a href="/logout">Logout</a></p>
-      <% } else { %>
-      <a href="/login">Login</a> | <a href="/register">Register</a>
-      <% } %>
+    <header class="header-container">
+      <h1><a href="/">ShopBetter</a></h1>
+      <ul class="nav-links">
+        <li><a href="/" class="page-nav">Home</a></li>
+        <li><a href="/contact" class="page-nav">Contact Us</a></li>
+        <li><a href="/about" class="page-nav">About Us</a></li>
+      </ul>
+
+      <ul class="nav-links">
+        <li>
+          <form class="search-input" action="/search" method="GET">
+            <input
+              type="text"
+              name="query"
+              class="search-input"
+              placeholder="Search products..."
+              required
+            />
+            <button class="search-btn" type="submit">
+              <i class="fas fa-search icon"></i>
+            </button>
+          </form>
+        </li>
+        <li>
+          <a href="/cart">
+            <i class="far fa-heart" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li>
+          <a href="/cart"> <i class="fas fa-cart-shopping"></i></a>
+        </li>
+        <li>
+          <i class="fas fa-user"></i>
+          <% if (user) { %>
+          <p>Welcome, <%= user.name %> | <a href="/logout">Logout</a></p>
+          <% } else { %>
+          <a href="/login">Login</a>
+          |
+          <a href="/register">Register</a>
+          <% } %>
+        </li>
+      </ul>
     </header>
     <main></main>
   </body>
