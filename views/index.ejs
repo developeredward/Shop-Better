@@ -1,17 +1,87 @@
-<%- include('partials/header') %>
-<h2>All Products</h2>
-<ul>
-  <% products.forEach(product => { %>
-  <li>
-    <h3><%= product.name %></h3>
-    <p><%= product.description %></p>
-    <p>$<%= product.price %></p>
-    <form action="/cart/add" method="POST">
-      <input type="hidden" name="productId" value="<%= product._id %>" />
-      <input type="number" name="quantity" value="1" min="1" />
-      <button type="submit">Add to Cart</button>
-    </form>
-  </li>
-  <% }) %>
-</ul>
+<%- include('partials/header', { title: 'Welcome to ShopBetter', currentPath })
+%>
+<link rel="stylesheet" href="/css/home.css" />
+<!-- ======= Slider Banner Section ======= -->
+<div class="swiper slider-banner">
+  <div class="swiper-wrapper">
+    <% featuredProducts.forEach(product => { %>
+    <div class="swiper-slide">
+      <div class="slide">
+        <div class="slide-overlay">
+          <p><%= product.description %></p>
+          <h2><%= product.name %></h2>
+
+          <a href="/product/<%= product._id %>" class="btn btn-primary">
+            Shop Now <i class="fa fa-arrow-right"></i>
+          </a>
+        </div>
+        <div class="slide-image">
+          <img src="<%= product.imageUrl %>" alt="" />
+        </div>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+
+  <!-- Add Pagination Dots -->
+  <div class="swiper-pagination"></div>
+
+  <!-- Add Navigation Buttons -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>
+<!-- ======= Categories Section ======= -->
+<section class="section categories">
+  <h2>Browse by Category</h2>
+  <div class="category-grid">
+    <a href="#" class="category-box active" data-category="all">All</a>
+    <% categories.forEach(category => { %>
+    <a
+      href="#"
+      class="category-box"
+      data-category="<%= category.toLowerCase() %>"
+    >
+      <div class="kmao">
+        <% if (category.toLowerCase() === 'computers') { %>
+        <i class="fa fa-desktop" style="font-size: 2.5rem"></i>
+        <% } else if (category.toLowerCase() === 'clothing') { %>
+        <i class="fa fa-tshirt" style="font-size: 2.5rem"></i>
+        <% } else if (category.toLowerCase() === 'phones') { %>
+        <i class="fa fa-mobile" style="font-size: 2.5rem"></i>
+        <% } else if (category.toLowerCase() === 'consoles') { %>
+        <i class="fa fa-gamepad" style="font-size: 2.5rem"></i>
+        <% } else if (category.toLowerCase() === 'sports') { %>
+        <i class="fa fa-futbol-o" style="font-size: 2.5rem"></i>
+        <% } else { %>
+        <i class="fa fa-tag" style="font-size: 2.5rem"></i>
+        <% } %>
+        <span class="category"><%= category %></span>
+      </div>
+    </a>
+    <% }) %>
+  </div>
+</section>
+
+<!-- ======= All Products Section ======= -->
+<section class="section all-products">
+  <div class="product-grid">
+    <% products.forEach(product => { %>
+    <div
+      class="product-card"
+      data-category="<%= product.category.toLowerCase() %>"
+    >
+      <img src="<%= product.imageUrl %>" alt="<%= product.name %>" />
+      <h3><%= product.name %></h3>
+      <p class="desc"><%= product.description %></p>
+      <p class="price">$<%= product.price %></p>
+      <form action="/cart/add" method="POST" class="cart-form">
+        <input type="hidden" name="productId" value="<%= product._id %>" />
+        <input type="number" name="quantity" value="1" min="1" />
+        <button type="submit" class="btn-sm">Add to Cart</button>
+      </form>
+    </div>
+    <% }) %>
+  </div>
+</section>
+
 <%- include('partials/footer') %>
