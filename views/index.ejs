@@ -66,7 +66,8 @@
 <section class="section all-products">
   <div class="product-grid">
     <% products.forEach(product => { %>
-    <div
+    <a
+      href="/product/<%= product._id %>"
       class="product-card"
       data-category="<%= product.category.toLowerCase() %>"
     >
@@ -79,7 +80,7 @@
         <input type="number" name="quantity" value="1" min="1" />
         <button type="submit" class="btn-sm">Add to Cart</button>
       </form>
-    </div>
+    </a>
     <% }) %>
   </div>
 </section>
